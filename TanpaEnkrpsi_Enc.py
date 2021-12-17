@@ -9,20 +9,22 @@ mqttBroker = "192.168.43.57"
 client = mqtt.Client("None Publisher")
 client.connect(mqttBroker, 1884)
 
-def pencatatan(i, waktu):
+def pencatatan(i, waktu, mess):
     f = open('publish_TanpaEnkripsi.csv', 'a')
     f.write("Message ke-" + i + ";" + str(mess) + ";" + waktu + "\n")
+
 
 # Mencatat waktu mulai
 start = timeit.default_timer()
 
 message ={}
 for i in range(100):
-    mess = int('{:10}'.format(randint (60,100)))
+    mess = str('{:10}'.format(randint (60,100)))
     print("Plaintext\t: ", mess)
     now = str(datetime.now().timestamp())
-    pencatatan(str(i), now)
+    pencatatan(str(i), now, mess)
     message['datetime'] = now
+    message['plaintext'] = mess
     stringify = json.dumps(message, indent=2)
     client.publish("NONE", stringify)
     print("Just published a message to topic NONE at "+ now)

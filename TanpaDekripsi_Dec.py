@@ -8,16 +8,18 @@ mqttBroker = "192.168.43.57"
 client = mqtt.Client("None Subscriber")
 client.connect(mqttBroker, 1884)
 
-def pencatatan(dateSend):
+def pencatatan(dateSend, message):
 	now = str(datetime.now().timestamp())
 	f = open('subscribe_TanpaDekripsi.csv', 'a')
-	f.write( now + ";" + dateSend + "\n")
+	f.write( message + ";" + now + ";" + dateSend + "\n")
 
 if __name__ == "__main__":
     def on_message(client, userdata, message):
         raw = json.loads(message.payload.decode("utf-8"))
         dateSend = raw['datetime']
-        pencatatan(dateSend)
+        message = raw['plaintext']
+        print("Message\t: ", message)
+        pencatatan(dateSend, message)
         
     client.loop_start()
     client.subscribe("NONE")
