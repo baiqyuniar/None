@@ -5,9 +5,9 @@ from datetime import datetime
 import json
 
 #MQTT
-mqttBroker = "192.168.43.57"
+mqttBroker = "192.168.1.157"
 client = mqtt.Client("None Publisher")
-client.connect(mqttBroker, 1884)
+client.connect(mqttBroker)
 
 def pencatatan(i, waktu, mess):
     f = open('publish_TanpaEnkripsi.csv', 'a')
@@ -18,7 +18,7 @@ def pencatatan(i, waktu, mess):
 start = timeit.default_timer()
 
 message ={}
-for i in range(100):
+for i in range(10000):
     mess = str('{:10}'.format(randint (60,100)))
     print("Plaintext\t: ", mess)
     now = str(datetime.now().timestamp())
