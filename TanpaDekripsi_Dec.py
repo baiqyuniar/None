@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 from datetime import datetime
 
 #MQTT
-mqttBroker = "192.168.1.157"
+mqttBroker = "34.101.187.83"
 client = mqtt.Client("None Subscriber")
 client.connect(mqttBroker)
 
