@@ -5,7 +5,7 @@ from datetime import datetime
 import json
 
 #MQTT
-mqttBroker = "192.168.1.157"
+mqttBroker = "34.101.187.83"
 client = mqtt.Client("None Publisher")
 client.connect(mqttBroker)
 
